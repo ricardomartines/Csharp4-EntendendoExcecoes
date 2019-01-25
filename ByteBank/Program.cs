@@ -11,14 +11,29 @@ namespace ByteBank
 
         static void Main(string[] args)
         {
+            try
+            {
+                ContaCorrente conta = new ContaCorrente(54, 0);
+            }
+            catch (ArgumentException ex)
+            {
+                if (ex.ParamName == "numero")
+                {
+                }
+
+               Console.WriteLine("Argumento com problema: " + ex.ParamName);
+               Console.WriteLine("Ocorreu exececao do tipo ArgumentException !");
+               Console.WriteLine(ex.Message);
+               Console.WriteLine(ex.ParamName);
+            }
+
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
 
             /*
-            ContaCorrente conta = new ContaCorrente(7480, 874150);
-            Console.WriteLine(ContaCorrente.TaxaOperacao);
-        
-
-            Console.ReadLine();
-            */
             try
             {
                 Metodo();
@@ -34,14 +49,12 @@ namespace ByteBank
                 Console.WriteLine(e.Message);
                 Console.WriteLine(e.StackTrace);
             }
+            */
         }
 
 
         public static int Dividir(int numero, int divisor)
         {
-            //ContaCorrente conta = null;
-            //Console.WriteLine(conta.Saldo);
-
             try
             {
                 return numero / divisor;
