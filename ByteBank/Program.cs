@@ -13,7 +13,20 @@ namespace ByteBank
         {
             try
             {
-                ContaCorrente conta = new ContaCorrente(54, 0);
+                ContaCorrente conta = new ContaCorrente(54, 543);
+
+                ContaCorrente conta2 = new ContaCorrente(2344, 4567);
+
+                conta2.Transferir(-10, conta);
+
+                conta.Depositar(150);
+                Console.WriteLine("O saldo da conta após o deposito de 150 é: " + conta.Saldo);
+
+                conta.Sacar(500);
+
+
+
+
             }
             catch (ArgumentException ex)
             {
@@ -27,9 +40,16 @@ namespace ByteBank
                Console.WriteLine(ex.ParamName);
             }
 
+            catch (SaldoInsuficienteException ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine("Exceção do tipo SaldoInsuficienteException");
+            }
+
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+
             }
 
 
