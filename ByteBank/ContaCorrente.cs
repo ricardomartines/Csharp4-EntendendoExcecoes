@@ -18,6 +18,10 @@ namespace ByteBank
 
         private double _saldo = 100;
 
+        public int ContadorSaquesNaoPermitidos { get; private set; }
+
+        public int ContadorTransferenciasNaoPermitidas { get; private set; }
+
         public double Saldo
         {
             get
@@ -72,8 +76,11 @@ namespace ByteBank
 
             if (_saldo < valor)
             {
-                throw new SaldoInsuficienteException(_saldo, valor);
+                // throw new SaldoInsuficienteException(_saldo, valor);
+                ContadorSaquesNaoPermitidos++;
+                throw new SaldoInsuficienteException(Saldo, valor);
             }
+            
 
             _saldo -= valor;
         }
@@ -86,7 +93,16 @@ namespace ByteBank
 
         public void Transferir(double valor, ContaCorrente contaDestino)
         {
-            contaDestino.Sacar(valor);
+            try
+            {
+                Sacar(valor);
+            }
+            catch(SaldoInsuficienteException ex)
+            {
+                ContadorTransferenciasNaoPermitidas++;
+                throw;
+            }
+
             contaDestino.Depositar(valor);
         }
     }
