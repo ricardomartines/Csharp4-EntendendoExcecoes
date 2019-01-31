@@ -93,6 +93,11 @@ namespace ByteBank
 
         public void Transferir(double valor, ContaCorrente contaDestino)
         {
+            if (valor < 0)
+            {
+                throw new ArgumentException("Valor inválido para a transferencia", nameof(valor));
+            }
+
             try
             {
                 Sacar(valor);
@@ -100,7 +105,7 @@ namespace ByteBank
             catch(SaldoInsuficienteException ex)
             {
                 ContadorTransferenciasNaoPermitidas++;
-                throw;
+                throw new OperacaoFinanceiraException("Operação financeira não realizada.", ex);
             }
 
             contaDestino.Depositar(valor);

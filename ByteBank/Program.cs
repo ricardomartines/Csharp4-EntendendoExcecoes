@@ -13,11 +13,11 @@ namespace ByteBank
         {
             try
             {
-                ContaCorrente conta1 = new ContaCorrente(54, 543);
+                ContaCorrente conta1 = new ContaCorrente(444, 543);
 
                 ContaCorrente conta2 = new ContaCorrente(2344, 4567);
 
-                conta1.Sacar(10000);
+                conta1.Transferir(5000, conta2); ;
 
                 //conta2.Transferir(-10, conta1);
 
@@ -62,6 +62,7 @@ namespace ByteBank
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
 
             }
 
