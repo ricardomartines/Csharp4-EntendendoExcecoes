@@ -3,13 +3,56 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace ByteBank
 {
     class Program
     {
-
         static void Main(string[] args)
+        {
+            try
+            {
+                CarregarContas();
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("CATCH NO METODO MAIN");
+            }
+
+            Console.WriteLine("Execução finalizada. Tecle enter para sair");
+            Console.ReadLine();
+        }
+
+        /*
+        try
+        {
+            Metodo();
+        }
+
+        catch (DivideByZeroException e)
+        {
+            Console.WriteLine("Não é possivel duvidir por zero !");
+        }
+
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            Console.WriteLine(e.StackTrace);
+        }
+        */
+
+
+        private static void CarregarContas()
+        {
+
+            using (LeitorDeArquivo leitor = new LeitorDeArquivo("teste.txt"))
+            {
+                leitor.LerProximaLinha();
+            }
+        }
+
+        public static void OperacoesConta()
         {
             try
             {
@@ -66,26 +109,7 @@ namespace ByteBank
 
             }
 
-
-            /*
-            try
-            {
-                Metodo();
-            }
-
-            catch (DivideByZeroException e)
-            {
-                Console.WriteLine("Não é possivel duvidir por zero !");
-            }
-
-            catch (Exception e)
-            {
-                Console.WriteLine(e.Message);
-                Console.WriteLine(e.StackTrace);
-            }
-            */
         }
-
 
         public static int Dividir(int numero, int divisor)
         {
